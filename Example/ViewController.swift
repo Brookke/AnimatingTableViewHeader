@@ -69,7 +69,12 @@ extension ViewController: UITableViewDelegate {
             if isScrollingUp {
                 newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
             } else if isScrollingDown {
-                newHeight = self.headerHeightConstraint.constant + abs(scrollDiff)
+                if (self.headerHeightConstraint.constant > self.maxHeaderHeight) {
+                     newHeight = self.headerHeightConstraint.constant + abs(scrollDiff)/2
+                } else {
+                     newHeight = self.headerHeightConstraint.constant + abs(scrollDiff)
+                }
+               
             }
 
             // Header needs to animate
