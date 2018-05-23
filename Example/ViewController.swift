@@ -56,19 +56,20 @@ extension ViewController: UITableViewDelegate {
         let scrollDiff = scrollView.contentOffset.y - self.previousScrollOffset
 
         let absoluteTop: CGFloat = 0;
-        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height;
-
-        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
-        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
+   
+        let isScrollingUp = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
+        let isScrollingDown = scrollDiff < 0 && scrollView.contentOffset.y < absoluteTop
+        let thing = scrollView.contentOffset.y < 0
+        print(scrollView.contentOffset.y)
 
         if canAnimateHeader(scrollView) {
 
             // Calculate new header height
             var newHeight = self.headerHeightConstraint.constant
-            if isScrollingDown {
+            if isScrollingUp {
                 newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
-            } else if isScrollingUp {
-                newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
+            } else if isScrollingDown {
+                newHeight = self.headerHeightConstraint.constant + abs(scrollDiff)
             }
 
             // Header needs to animate
