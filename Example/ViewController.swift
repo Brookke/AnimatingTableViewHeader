@@ -70,7 +70,7 @@ extension ViewController: UITableViewDelegate {
                 newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
             } else if isScrollingDown {
                 if (self.headerHeightConstraint.constant + abs(scrollDiff) > self.maxHeaderHeight) {
-                    let c: CGFloat = 0.5
+                    let c: CGFloat = 0.55
                     let d: CGFloat = view.bounds.size.height - maxHeaderHeight
                     let rubberBand = (1.0 - (1.0 / ((abs(scrollDiff) * c / d) + 1.0))) * d
                     newHeight = self.headerHeightConstraint.constant + rubberBand
